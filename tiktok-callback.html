@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TikTok Authorization Callback — RiseDaily Uploader</title>
+<style>body{font-family:system-ui,sans-serif;max-width:760px;margin:40px auto;padding:0 20px;line-height:1.7;color:#222}
+code{background:#f0f0f0;padding:12px;display:block;word-break:break-all;border-radius:6px;font-size:15px}
+.err{color:#b00}</style>
+</head>
+<body>
+<h1>TikTok Authorization</h1>
+<div id="out"><p>Reading authorization response…</p></div>
+<script>
+(function(){
+  var q = new URLSearchParams(location.search);
+  var code = q.get('code'), err = q.get('error'), out = document.getElementById('out');
+  if (err) {
+    out.innerHTML = '<p class="err">Authorization failed: ' + err + '</p><p>' + (q.get('error_description')||'') + '</p>';
+  } else if (code) {
+    out.innerHTML = '<p><strong>Authorization successful.</strong> Copy the code below and paste it into the RiseDaily Uploader setup:</p><code>' + code + '</code>';
+  } else {
+    out.innerHTML = '<p class="err">No authorization code found in the URL.</p>';
+  }
+})();
+</script>
+</body>
+</html>
